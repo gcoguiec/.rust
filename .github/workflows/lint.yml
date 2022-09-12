@@ -1,0 +1,29 @@
+name: Reusable Lint Workflow
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint code-base.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup rust toolchain
+        run: rustup show
+      - name: Restore cargo cache
+        uses: Swatinem/rust-cache@v1
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --workspace --all-targets --release
+      - name: Run clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --workspace --all-targets --verbose -- --deny warnings
+      - name: Run cspell
+        uses: streetsidesoftware/cspell-action@v1
+        with:
+          files: "**/*.{rs,json,toml,md,yml}"
