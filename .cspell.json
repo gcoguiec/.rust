@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "caseSensitive": false,
+  "ignorePaths": ["target"],
+  "dictionaries": [
+    "en_US",
+    "public-licenses",
+    "softwareTerms",
+    "filetypes",
+    "misc"
+  ],
+  "words": ["rlib", "rustfmt", "clippy", "rustdoc"]
+}
