@@ -1,0 +1,22 @@
+name: Reusable Check Code Format Workflow
+on:
+  workflow_call:
+
+jobs:
+  format:
+    name: Check code format.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source.
+        uses: actions/checkout@v3
+      - name: Setup rust toolchain.
+        run: rustup show
+      - name: Restore cargo cache.
+        uses: Swatinem/rust-cache@v1
+      - name: Run rustfmt.
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all --verbose -- --check
+      - name: Run dprint.
+        uses: dprint/check@v2.0

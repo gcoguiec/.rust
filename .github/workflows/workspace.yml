@@ -1,0 +1,19 @@
+name: Reusable Workspace Bootstrap Workflow
+on:
+  workflow_call:
+
+jobs:
+  workspace:
+    name: Checkout project, install deps and cache the registry.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source.
+        uses: actions/checkout@v3
+      - name: Setup rust toolchain.
+        run: rustup show
+      - name: Fetch dependencies from network.
+        uses: actions-rs/cargo@v1
+        with:
+          command: fetch
+      - name: Cache cargo registry.
+        uses: Swatinem/rust-cache@v1
